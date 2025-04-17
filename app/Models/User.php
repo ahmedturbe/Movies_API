@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -22,6 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -45,4 +48,22 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    //Relations with other Models
+        public function interactions(): HasMany
+        {
+            return $this->hasMany(Interaction::class);
+        }
+
+        public function favoriteMovies(): MorphToMany
+        {
+            return $this->morphedByMany(Movie::class, 'interactable', 'interactions')
+                        ->where('type', 'favorite');
+        }
+
+        public function followedMovies(): MorphToMany
+        {
+            return $this->morphedByMany(Movie::class, 'interactable', 'interactions')
+                        ->where('type', 'follow');
+        }
 }
