@@ -64,3 +64,34 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+<h1>Abaut this repo</h1>
+✨ Features
+Full CRUD for Actors and Movies
+
+Slug-based routing for cleaner URLs (/actors/{slug})
+
+Polymorphic one-to-one image relation (Actor, Movie ⇄ Image)
+
+Polymorphic many-to-many for user interactions:
+
+Users can favorite or follow movies and actors
+
+Laravel Sanctum authentication for protecting routes
+
+TDD-first development with PHPUnit feature tests
+
+Clean and modular architecture (Services/Slugger.php, route model binding)
+
+📦 Tech Stack
+Laravel 12
+
+PHP 8.3+
+
+Sanctum
+
+PHPUnit
+
+SQLite (default for testing)
+
+RESTful API
