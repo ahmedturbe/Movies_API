@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUserRequest extends FormRequest
+class StoreActorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +23,12 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-        ];
+            'image_id' => 'required|exists:images,id',
+            'slug' => 'required|string|max:255|unique:actors,slug',
+            'id' => 'required|integer|exists:actors,id',
+            'imageable_type' => 'required|string|in:App\Models\Actor',
+            'imageable_id' => 'required|integer|exists:actors,id',
 
+        ];
     }
 }

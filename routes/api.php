@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\API\ActorController;
+use App\Http\Controllers\API\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\UserController;
+
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -18,4 +20,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+});
+
+Route::middleware('api')->group(function () {
+    Route::get('/actors', [ActorController::class, 'index']);
+    Route::post('/actors', [ActorController::class, 'store'])->middleware('auth:sanctum');
+    Route::get('/actors/{slug}', [ActorController::class, 'show']);
+    Route::put('/actors/{slug}', [ActorController::class, 'update'])->middleware('auth:sanctum');
+    Route::delete('/actors/{slug}', [ActorController::class, 'destroy'])->middleware('auth:sanctum');
 });

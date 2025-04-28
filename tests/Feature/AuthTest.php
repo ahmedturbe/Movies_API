@@ -10,8 +10,11 @@ use Tests\TestCase;
 class AuthTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
+
+    /** @test */
     public function test_user_can_register()
     {
+
         $response = $this->postJson('/api/register', [
             'name' => 'Test User',
             'email' => 'test@example.com',
